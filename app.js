@@ -37,6 +37,6 @@ const connectWithRetry = () => {
 
 connectWithRetry();
 // Start listening Server
-app.listen(3600, () => {
-    console.log("Server Listening at", 3600);
+app.listen(process.env.SERVER_PORT, () => {
+    console.log("Server Listening at", process.env.SERVER_PORT);
 })
