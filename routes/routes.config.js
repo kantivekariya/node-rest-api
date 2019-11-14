@@ -20,7 +20,7 @@ router.post('/users', async (req, res) => {
         lastName: req.body.lastName,
         age: req.body.age,
         phone: req.body.phone,
-        password: pw.encryptedData,
+        password: pw,
         email: req.body.email,
         date: req.body.date
     });
