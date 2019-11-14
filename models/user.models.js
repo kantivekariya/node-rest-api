@@ -17,6 +17,10 @@ const postSchema = mongoose.Schema({
         type: Number,
         require: false
     },
+    password: {
+        type: String,
+        require: true
+    },
     email: {
         type: String,
         require: false
