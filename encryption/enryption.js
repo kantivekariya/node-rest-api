@@ -2,6 +2,8 @@
 const crypto = require('crypto');
 const algorithm = 'aes256';
 const key = crypto.randomBytes(32);
+const iv = crypto.randomBytes(16);
+
 
 exports.encrypt = (text) => {
     let cipher = crypto.createCipheriv(algorithm, Buffer.from(key), iv);
