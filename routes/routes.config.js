@@ -4,7 +4,7 @@ const userSchma = require('../models/user.models');
 const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
 
-
+// LOGIN
 router.post("/login", (req, res, next) => {
     userSchma.find({ email: req.body.email })
         .exec()
@@ -16,7 +16,6 @@ router.post("/login", (req, res, next) => {
                 });
             }
             bcrypt.compare(req.body.password, user[0].password, (err, result) => {
-                console.log(result)
                 if (err) {
                     return res.status(401).json({
                         message: "Auth failed"
@@ -33,7 +32,6 @@ router.post("/login", (req, res, next) => {
                             expiresIn: "60000"
                         }
                     );
-                    console.log(token)
                     return res.status(200).json({
                         message: "Auth successful",
                         token: token
@@ -45,7 +43,6 @@ router.post("/login", (req, res, next) => {
             });
         })
         .catch(err => {
-            console.log(err);
             res.status(500).json({
                 error: err
             });
