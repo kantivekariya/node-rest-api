@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const postSchema = mongoose.Schema({
     firtsName: {
         type: String,
-        require: false
+        require: true
     },
     lastName: {
         type: String,
@@ -19,7 +19,9 @@ const postSchema = mongoose.Schema({
     },
     email: {
         type: String,
-        require: false
+        require: true,
+        unique: true,
+        match: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
     },
     password: {
         type: String,

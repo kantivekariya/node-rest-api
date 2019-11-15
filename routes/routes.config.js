@@ -10,7 +10,6 @@ router.post("/login", (req, res, next) => {
     userSchma.find({ email: req.body.email })
         .exec()
         .then(user => {
-            console.log(user[0].password)
             if (user.length < 1) {
                 return res.status(401).json({
                     message: "Auth failed"
@@ -87,13 +86,11 @@ router.post("/signup", (req, res, next) => {
                         user
                             .save()
                             .then(result => {
-                                console.log(result);
                                 res.status(201).json({
                                     message: "User created"
                                 });
                             })
                             .catch(err => {
-                                console.log(err);
                                 res.status(500).json({
                                     error: err
                                 });
@@ -115,17 +112,24 @@ router.get('/users/:userId', async (req, res) => {
 });
 
 // DELETE BU ID
-router.delete('/users/:userId', async (req, res) => {
-    try {
-        const removeUser = await userSchma.remove({ _id: req.params.userId });
-        res.status(200).json(removeUser);
-    } catch {
-        res.json({ message: err });
-    };
-});
+router.delete("/users/:userId", (req, res, next) => {
+    userSchma.remove({ _id: req.params.userId })
+      .exec()
+      .then(result => {
+        res.status(200).json({
+          message: "User deleted"
+        });
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json({
+          error: err
+        });
+      });
+  });
 
 // UPDATE BY ID
-router.patch('/users/:userId', async (req, res) => {
+router.put('/users/:userId', async (req, res) => {
     try {
         const updateUser = await userSchma.updateOne({ _id: req.params.userId }, { $set: req.body });
         res.status(200).json(updateUser);
