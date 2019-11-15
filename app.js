@@ -1,11 +1,9 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
-require('dotenv/config');
+const dbConfig = require('./comman/services/mongoose.service');
 
 app.use(bodyParser.json());
-
 // Routes
 const routes = require('./routes/routes.config');
 app.use('/', routes);
@@ -25,19 +23,6 @@ app.use(function (req, res, next) {
 });
 
 // Connect Database
-const connectWithRetry = () => {
-    console.log('MongoDB connection with retry')
-    mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true }).then(() => {
-        console.log('MongoDB is connected');
-    }).catch(err => {
-        console.log('MongoDB connection unsuccessful, retry after 5 seconds. ');
-        setTimeout(connectWithRetry, 5000);
-    });
-};
+dbConfig();
 
-connectWithRetry();
-// Start listening Server
-// app.listen(process.env.SERVER_PORT, () => {
-//     console.log("Server Listening at", process.env.SERVER_PORT);
-// })
 module.exports = app;

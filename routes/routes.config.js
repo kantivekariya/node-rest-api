@@ -1,3 +1,4 @@
+const config = require('../comman/config/env.config');
 const express = require('express');
 const router = express.Router();
 const userSchma = require('../models/user.models');
@@ -27,9 +28,9 @@ router.post("/login", (req, res, next) => {
                             email: user[0].email,
                             userId: user[0]._id
                         },
-                        process.env.JWT_KEY,
+                        config.JWT_KEY,
                         {
-                            expiresIn: "60000"
+                            expiresIn: config.JWT_EXPIRATION_IN_SECONDS
                         }
                     );
                     return res.status(200).json({
