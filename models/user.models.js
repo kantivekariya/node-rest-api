@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const postSchema = mongoose.Schema({
-    firtsName: {
+    firstName: {
         type: String,
         require: true
     },

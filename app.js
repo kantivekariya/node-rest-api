@@ -1,8 +1,9 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const dbConfig = require('./comman/services/mongoose.service');
-
+app.use(cors());
 app.use(bodyParser.json());
 // Routes
 const routes = require('./routes/routes.config');

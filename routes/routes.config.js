@@ -60,7 +60,7 @@ router.get('/users', async (req, res) => {
 });
 
 // SIGNUP USER
-router.post("/signup", (req, res, next) => {
+router.post("/register", (req, res, next) => {
     userSchma.find({ email: req.body.email })
         .exec()
         .then(user => {
@@ -76,7 +76,7 @@ router.post("/signup", (req, res, next) => {
                         });
                     } else {
                         const user = new userSchma({
-                            firtsName: req.body.firtsName,
+                            firstName: req.body.firstName,
                             lastName: req.body.lastName,
                             age: req.body.age,
                             phone: req.body.phone,
