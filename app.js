@@ -7,7 +7,8 @@ app.use(cors());
 app.use(bodyParser.json());
 // Routes
 const routes = require('./routes/routes.config');
-app.use('/', routes);
+
+// app.use('/', routes);
 
 // Content header
 app.use(function (req, res, next) {
@@ -22,7 +23,7 @@ app.use(function (req, res, next) {
         return next();
     }
 });
-
+routes.routesConfig(app);
 // Connect Database
 dbConfig();
 
